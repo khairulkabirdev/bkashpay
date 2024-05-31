@@ -1,0 +1,12 @@
+{
+    "id": "Khairulkabir/BkashPay",
+    "name": "BkashPay",
+    "namespace": "Khairulkabir\\BkashPay\\",
+    "provider": "Khairulkabir\\BkashPay\\Providers\\BkashPayServiceProvider",
+    "author": "Khairul Kabir",
+    "url": "https://khairulkabirdev.github.io",
+    "version": "1.0.0",
+    "description": "bKashPay payment gateway integration",
+    "minimum_core_version": "7.3.5"
+}
+ 

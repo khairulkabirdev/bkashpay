@@ -12,14 +12,14 @@ use Botble\Payment\Forms\PaymentMethodForm;
 class BkashPaymentMethodForm extends PaymentMethodForm
 {
     public function setup(): void
-    { 
+    {
         parent::setup();
 
         $this
             ->paymentId(BKASHPAY_PAYMENT_METHOD_NAME)
             ->paymentName('bKash')
             ->paymentDescription(__('Customer can buy product and pay with :name', ['name' => 'bkash']))
-            ->paymentLogo(url('vendor/core/plugins/bkashpay/images/bkash-pay.png'),)
+            ->paymentLogo(url('vendor/core/plugins/bkashpay/images/bkash-pay.png'), )
             ->paymentUrl('https://bkash.com')
             ->paymentInstructions(view('plugins/bkashpay::settings')->render())
             ->add(

@@ -11,17 +11,17 @@ class BkashpayServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (is_plugin_active('payment')) {
-            $this->setNamespace('plugins/bkashpay')
-                ->loadHelpers()
-                ->loadRoutes()
-                ->loadAndPublishViews()
-                ->loadAndPublishTranslations()
-                ->publishAssets();
-
-            $this->app->register(HookServiceProvider::class);
+        if (! is_plugin_active('payment')) {
+            return;
         }
-            
-            
+
+        $this->setNamespace('plugins/bkashpay')
+            ->loadHelpers()
+            ->loadRoutes()
+            ->loadAndPublishViews()
+            ->loadAndPublishTranslations()
+            ->publishAssets();
+
+        $this->app->register(HookServiceProvider::class);
     }
 }

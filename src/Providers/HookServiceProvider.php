@@ -2,14 +2,13 @@
 
 namespace Khairulkabir\BkashPay\Providers;
 
+use Botble\Base\Facades\Html;
 use Botble\Payment\Enums\PaymentMethodEnum;
-use Khairulkabir\BkashPay\Services\Gateways\BkashPayPaymentService;
-use Khairulkabir\BkashPay\Forms\BkashPaymentMethodForm;
-use Collective\Html\HtmlFacade as Html;
+use Botble\Payment\Facades\PaymentMethods;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use Botble\Payment\Facades\PaymentMethods;
-
+use Khairulkabir\BkashPay\Forms\BkashPaymentMethodForm;
+use Khairulkabir\BkashPay\Services\Gateways\BkashPayPaymentService;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -26,7 +25,7 @@ class HookServiceProvider extends ServiceProvider
         add_filter(BASE_FILTER_ENUM_ARRAY, function ($values, $class) {
             if ($class == PaymentMethodEnum::class) {
                 $values['BKASHPAY'] = BKASHPAY_PAYMENT_METHOD_NAME
-;
+                ;
             }
 
             return $values;
@@ -34,7 +33,7 @@ class HookServiceProvider extends ServiceProvider
 
         add_filter(BASE_FILTER_ENUM_LABEL, function ($value, $class) {
             if ($class == PaymentMethodEnum::class && $value == BKASHPAY_PAYMENT_METHOD_NAME
-) {
+            ) {
                 $value = 'BkashPay';
             }
 
@@ -43,7 +42,7 @@ class HookServiceProvider extends ServiceProvider
 
         add_filter(BASE_FILTER_ENUM_HTML, function ($value, $class) {
             if ($class == PaymentMethodEnum::class && $value == BKASHPAY_PAYMENT_METHOD_NAME
-) {
+            ) {
                 $value = Html::tag(
                     'span',
                     PaymentMethodEnum::getLabel($value),
@@ -57,7 +56,7 @@ class HookServiceProvider extends ServiceProvider
 
         add_filter(PAYMENT_FILTER_GET_SERVICE_CLASS, function ($data, $value) {
             if ($value == BKASHPAY_PAYMENT_METHOD_NAME
-) {
+            ) {
                 $data = BkashPayPaymentService::class;
             }
 
@@ -72,8 +71,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function registerBkashPayMethod(?string $html, array $data): string
     {
-        PaymentMethods::method(BKASHPAY_PAYMENT_METHOD_NAME
-, [
+        PaymentMethods::method(BKASHPAY_PAYMENT_METHOD_NAME, [
             'html' => view('plugins/bkashpay::methods', $data)->render(),
         ]);
 
@@ -83,7 +81,7 @@ class HookServiceProvider extends ServiceProvider
     public function checkoutWithBkashPay(array $data, Request $request): array
     {
         if ($request->input('payment_method') == BKASHPAY_PAYMENT_METHOD_NAME
-) {
+        ) {
             $currentCurrency = get_application_currency();
 
             $currencyModel = $currentCurrency->replicate();
@@ -125,9 +123,6 @@ class HookServiceProvider extends ServiceProvider
             }
 
             $checkoutUrl = $bKashPayService->makePayment($paymentData);
-
-
-    
 
             if ($checkoutUrl) {
                 $data['checkoutUrl'] = $checkoutUrl;

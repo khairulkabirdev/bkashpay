@@ -2,14 +2,14 @@
 
 namespace Khairulkabir\BkashPay;
 
-use Illuminate\Support\Facades\Schema;
 use Botble\PluginManagement\Abstracts\PluginOperationAbstract;
+use Botble\Setting\Models\Setting;
 
 class Plugin extends PluginOperationAbstract
 {
     public static function remove(): void
     {
-       
+
         Setting::query()
             ->whereIn('key', [
                 'payment_bkashpay_name',

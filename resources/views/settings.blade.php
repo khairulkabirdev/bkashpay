@@ -1,4 +1,3 @@
-
 <ol>
     <li>
         <p> Create an Bkash Merchant Account
@@ -24,7 +23,7 @@
 
     </li>
     <li class="pt-4">
-        <p>{{ __('Enter all intfo into the box in right hand') }}</p>
+        <p>{{ __('Enter all into into the box in right hand') }}</p>
     </li>
 </ol>
 

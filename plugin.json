@@ -5,7 +5,7 @@
     "provider": "Khairulkabir\\BkashPay\\Providers\\BkashpayServiceProvider",
     "author": "Khairul Kabir",
     "url": "https://khairulkabirdev.github.io",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "bKashPay payment gateway integration",
     "minimum_core_version": "7.2.0"
 }

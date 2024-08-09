@@ -31,8 +31,53 @@ class BkashPayPaymentService
         ) == 1 ? 'https://tokenized.pay.bka.sh/v1.2.0-beta/' : 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/';
     }
 
+    /**
+     * Check if the necessary credentials are set and valid.
+     *
+     * @return array|null
+     */
+    protected function checkCredentials(): ?array
+    {
+        if (empty($this->username)) {
+            return [
+                'statusCode' => 4518,
+                'statusMessage' => 'Username not filled or found. Please contact your admin.',
+            ];
+        }
+
+        if (empty($this->password)) {
+            return [
+                'statusCode' => 4518,
+                'statusMessage' => 'Password not filled or found. Please contact your admin.',
+            ];
+        }
+
+        if (empty($this->appKey)) {
+            return [
+                'statusCode' => 4518,
+                'statusMessage' => 'App Key not filled or found. Please contact your admin.',
+            ];
+        }
+
+        if (empty($this->appSecretKey)) {
+            return [
+                'statusCode' => 4518,
+                'statusMessage' => 'App Secret Key not filled or found. Please contact your admin.',
+            ];
+        }
+
+        return null; // Credentials are valid
+    }
+
     public function makePayment(array $data)
     {
+        // Check credentials first
+        $credentialCheck = $this->checkCredentials();
+        if ($credentialCheck) {
+            // Return the error message if credentials are missing
+            return $credentialCheck;
+        }
+        
         $tokenBK = $this->initToken();
 
         // Generate the return URL

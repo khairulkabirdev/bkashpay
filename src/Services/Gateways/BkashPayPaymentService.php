@@ -42,7 +42,7 @@ class BkashPayPaymentService
 
         $requestData = [
             'mode' => '0011',
-            'amount' => $Amount,
+            'amount' = round($Amount),
             'currency' => 'BDT',
             'intent' => 'sale',
             'payerReference' => '0', // Replace with the actual payer reference

@@ -124,11 +124,22 @@ class HookServiceProvider extends ServiceProvider
 
             $checkoutUrl = $bKashPayService->makePayment($paymentData);
 
-            if ($checkoutUrl) {
-                $data['checkoutUrl'] = $checkoutUrl;
-            } else {
+            if (isset($checkoutUrl['statusCode'])) {
+                // If statusCode exists in the response
+                if (isset($checkoutUrl['statusMessage'])) {
+                    $data['message'] = $checkoutUrl['statusMessage'];
+                } else {
+                    $data['message'] = __('Something went wrong. Please try again later.');
+                }
                 $data['error'] = true;
-                $data['message'] = __('Something went wrong. Please try again later.');
+            } else {
+                // If no statusCode, assuming a successful response
+                if ($checkoutUrl) {
+                    $data['checkoutUrl'] = $checkoutUrl;
+                } else {
+                    $data['error'] = true;
+                    $data['message'] = __('Something went wrong. Please try again later.');
+                }
             }
 
             return $data;

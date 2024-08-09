@@ -1,5 +1,5 @@
 {
-    "id": "Khairulkabir/bkashpay",
+    "id": "Khairulkabir/BkashPay",
     "name": "bkashpay",
     "namespace": "Khairulkabir\\BkashPay\\",
     "provider": "Khairulkabir\\BkashPay\\Providers\\BkashpayServiceProvider",
